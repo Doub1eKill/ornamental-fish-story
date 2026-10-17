@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, type CSSProperties, type ReactNode } from "
 import { gsap, useGSAP } from "../lib/gsap";
 import { FramePlayer, fitRect } from "../lib/FramePlayer";
 import { MQ } from "../lib/media";
+import { addSnapPoints, pointsOnTrigger } from "../lib/scrollAssist";
 import { useMediaQuery } from "../lib/useMediaQuery";
 import { frameUrl, pickSource, type SequenceConfig } from "../data/sequences";
 
@@ -101,6 +102,8 @@ export default function ImageSequence({ config, alt, build, priority = false, ch
         });
         tl.to(state, { frame: source.frameCount - 1, duration: 1, onUpdate: () => player.setFrame(state.frame) }, 0);
         build?.(tl, { isMobile: Boolean(context.conditions?.isMobile), section });
+        // scroll assist: หยุดตรงจังหวะที่ข้อความขึ้นครบ (config.snap)
+        if (config.snap && tl.scrollTrigger) return addSnapPoints(pointsOnTrigger(tl.scrollTrigger, config.snap));
       });
 
       return () => {

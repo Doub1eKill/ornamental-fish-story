@@ -4,7 +4,19 @@ import FishPhoto from "../components/FishPhoto";
 import SceneShell, { SceneHeading } from "../components/SceneShell";
 import { sceneMeta, tropical } from "../data/scenes";
 import { gsap } from "../lib/gsap";
-import { SCRUB, revealHeading, revealList, useSceneMotion } from "../lib/motion";
+import { revealHeading, revealList, useSceneMotion } from "../lib/motion";
+import { addSnapPoints, pointsOnTrigger } from "../lib/scrollAssist";
+
+/**
+ * หน่วงการ์ดปลา (scroll assist)
+ * - HOLD: ช่วงพักก่อนการ์ดเริ่มเลื่อน และหลังใบสุดท้ายมาถึง (สัดส่วนของระยะเลื่อนการ์ด)
+ * - DAMP: ต้องเลื่อนนานกว่าระยะการ์ดจริงกี่เท่า → การ์ดไปช้าลง อ่านทันขึ้น
+ * - RAIL_SCRUB: การ์ดตาม scroll แบบมีน้ำหนัก (ค่ามาก = หน่วงมาก)
+ * - แต่ละใบมีจุดหยุด: ปล่อยมือแล้วการ์ดใบที่ใกล้ที่สุดเลื่อนเข้าตำแหน่งเอง
+ */
+const HOLD = 0.12;
+const DAMP = 1.6;
+const RAIL_SCRUB = 1.1;
 
 const meta = sceneMeta[3];
 
@@ -18,7 +30,13 @@ function buildRail(section: HTMLElement, isMobile: boolean) {
 
   if (isMobile) {
     revealList(cards, section, true);
-    return;
+    // มือถือ: ช่วยหยุดให้การ์ดแต่ละใบอยู่กลางจอ
+    return addSnapPoints(() =>
+      cards.map((card) => {
+        const r = card.getBoundingClientRect();
+        return r.top + window.scrollY - Math.max(0, (window.innerHeight - r.height) / 2);
+      }),
+    );
   }
 
   const rail = section.querySelector<HTMLElement>(".card-rail")!;
@@ -34,25 +52,34 @@ function buildRail(section: HTMLElement, isMobile: boolean) {
   setActive(0);
 
   let current = 0;
-  gsap.to(track, {
-    x: () => -distance(),
-    ease: "none",
+  const total = 1 + HOLD * 2;
+  const tl = gsap.timeline({
+    defaults: { ease: "none" },
     scrollTrigger: {
       trigger: section,
       start: "top top",
-      end: () => `+=${distance()}`,
+      // ระยะ pin = ระยะการ์ดจริง × DAMP + ช่วงพักหัว/ท้าย
+      end: () => `+=${distance() * DAMP * total}`,
       pin: true,
-      scrub: SCRUB,
+      scrub: RAIL_SCRUB,
       invalidateOnRefresh: true,
-      // การ์ด active ตาม progress (ใบสุดท้ายชิดขวา ไม่เคยผ่านกึ่งกลางจอ จึงไม่ใช้ตำแหน่งการ์ด)
+      // การ์ด active ตามระยะที่การ์ดเลื่อนไปแล้ว (ไม่นับช่วงพัก)
       onUpdate: (self) => {
-        const index = Math.round(self.progress * (cards.length - 1));
+        const railProgress = gsap.utils.clamp(0, 1, (self.progress * total - HOLD) / 1);
+        const index = Math.round(railProgress * (cards.length - 1));
         if (index !== current) setActive((current = index));
       },
     },
   });
+  tl.to(track, { x: () => -distance(), duration: 1 }, HOLD);
+  tl.to({}, { duration: HOLD }); // พักท้ายให้ใบสุดท้ายค้างก่อนปล่อย pin
+
+  // จุดหยุดทีละใบ (progress ของ timeline ที่การ์ดใบ i อยู่ตำแหน่ง active พอดี)
+  const cardStops = cards.map((_, i) => (HOLD + i / (cards.length - 1)) / total);
+  const removeSnap = addSnapPoints(pointsOnTrigger(tl.scrollTrigger!, [0, ...cardStops, 1]));
 
   return () => {
+    removeSnap();
     section.classList.remove("is-rail");
     cards.forEach((card) => card.classList.remove("is-active"));
     progress.textContent = "";

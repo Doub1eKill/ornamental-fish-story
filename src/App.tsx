@@ -1,5 +1,6 @@
 import SceneChrome from "./components/SceneChrome";
 import { useScrollRestoration } from "./lib/useScrollRestoration";
+import { useScrollAssist } from "./lib/scrollAssist";
 import { sceneMeta, ui } from "./data/scenes";
 import HeroScene from "./scenes/HeroScene";
 import TraitsScene from "./scenes/TraitsScene";
@@ -13,6 +14,7 @@ import EndingScene from "./scenes/EndingScene";
 
 export default function App() {
   useScrollRestoration();
+  useScrollAssist();
 
   return (
     <>

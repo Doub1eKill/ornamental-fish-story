@@ -19,13 +19,24 @@ const CREAM = "#F4EFE3"; // --text: จุดที่ผ่านแล้ว
 const LABEL_START = 0.52;
 const LABEL_GAP = 0.05;
 
+/** ความยาวเส้น leader — คำนวณจาก x1/y1/x2/y2 ไม่พึ่ง getTotalLength() (ใช้กับ element ที่ไม่ render ไม่ได้) */
+function lineLength(line: SVGLineElement): number {
+  try {
+    return line.getTotalLength();
+  } catch {
+    const n = (a: string) => Number(line.getAttribute(a) ?? 0);
+    return Math.hypot(n("x2") - n("x1"), n("y2") - n("y1"));
+  }
+}
+
 function buildAnatomyTimeline(tl: gsap.core.Timeline, { isMobile, section }: SequenceBuildContext) {
   tl.from(".scene-heading", { opacity: 0, y: 24, duration: 0.08 }, 0);
 
   anatomy.labels.forEach(({ id }, index) => {
     const at = LABEL_START + index * LABEL_GAP;
     const leader = section.querySelector<SVGLineElement>(`#leader-${id}`);
-    const length = leader ? leader.getTotalLength() : 0;
+    // มือถือซ่อนเส้น (display:none) → getTotalLength() โยน error ใน Chrome และทำให้ทั้งเว็บว่าง
+    const length = !isMobile && leader ? lineLength(leader) : 0;
 
     tl.fromTo(`#dot-${id}`, { opacity: 0, scale: 0, transformOrigin: "50% 50%" }, { opacity: 1, scale: 1, fill: GOLD, duration: 0.01 }, at);
     if (!isMobile) {

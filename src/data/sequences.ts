@@ -32,6 +32,11 @@ export interface SequenceConfig {
   /** ระยะ scroll ระหว่าง pin หน่วย vh (ตาม SEQ-*.md) */
   pinVh: number;
   scrub: number;
+  /**
+   * จุดหยุดของ scroll assist (progress 0–1 ของฉาก) — ตั้งไว้ตรงจังหวะที่ข้อความขึ้นครบ/animation จบ
+   * ต้องตรงกับ timing ใน build ของฉากนั้น (HeroScene / AnatomyScene / AquascapeScene)
+   */
+  snap?: number[];
   sources: SequenceSource[];
 }
 
@@ -48,6 +53,7 @@ export const sequences = {
     id: "seq-1-hero",
     pinVh: 300,
     scrub: 0.6,
+    snap: [0, 0.55, 1], // หัวข้อ · คำนิยามขึ้นครบ (≈0.46–0.64) · เครดิต + scroll prompt
     sources: [
       {
         path: `${BASE}sequences/seq-1-hero`,
@@ -64,6 +70,7 @@ export const sequences = {
     id: "seq-2-anatomy",
     pinVh: 250,
     scrub: 0.6,
+    snap: [0, 0.48, 0.76, 1], // หัวข้อ · ปลาหยุดนิ่ง · label 5 จุดแรกครบ · ครบ 9 จุด
     sources: [
       {
         path: `${BASE}sequences/seq-2-anatomy`,
@@ -80,6 +87,7 @@ export const sequences = {
     id: "seq-3-aquascape",
     pinVh: 280,
     scrub: 0.6,
+    snap: [0, 0.15, 0.43, 0.62, 0.8, 1], // เริ่ม · intro · หลังตู้ · กลางตู้ · หน้าตู้ · หลักการจัด
     sources: [
       {
         path: `${BASE}sequences/seq-3-aquascape`,
