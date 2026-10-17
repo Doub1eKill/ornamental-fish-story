@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-cichlids-title group-cichlids-desc">
+  <title id="group-cichlids-title">กลุ่มปลาหมอสี (Cichlids)</title>
+  <desc id="group-cichlids-desc">ภาพประกอบปลาตัวแทนกลุ่มปลาหมอสี ลำตัวกว้าง หัวและตาใหญ่ ริมฝีปากชัด สีเขียวมะกอกเข้มมีลายส้ม</desc>
+  <defs></defs>
+  <g id="group-cichlids" class="fish">
+    <path id="group-cichlids-tail" d="M124 124 C100 90 74 84 70 96 C80 116 80 136 70 154 C74 166 100 160 124 132 Z" fill="#3D4A3A"/>
+    <path id="group-cichlids-fin-dorsal" d="M150 80 C190 52 262 48 298 76 L290 84 C250 72 200 74 156 94 Z" fill="#3D4A3A"/>
+    <path id="group-cichlids-fin-anal" d="M158 158 C190 186 232 188 252 166 L240 156 Z" fill="#3D4A3A"/>
+    <path id="group-cichlids-body" d="M118 124 C136 70 236 54 300 80 C334 94 346 124 320 148 C270 186 150 178 118 124 Z" fill="#4A5A44"/>
+    <g id="group-cichlids-pattern" fill="#F2913D">
+      <ellipse cx="204" cy="142" rx="30" ry="14"/>
+      <ellipse cx="254" cy="120" rx="20" ry="11"/>
+      <ellipse cx="166" cy="116" rx="16" ry="9"/>
+      <circle cx="132" cy="122" r="9"/><circle cx="132" cy="122" r="4" fill="#06182A"/>
+    </g>
+    <path id="group-cichlids-fin-pectoral" d="M286 136 C270 146 264 158 270 162 C282 154 292 144 296 138 Z" fill="#5E6E56"/>
+    <path id="group-cichlids-lips" d="M334 120 C344 122 346 132 336 136" stroke="#2B332A" stroke-width="4" fill="none" stroke-linecap="round"/>
+    <g id="group-cichlids-eye"><circle cx="304" cy="106" r="12" fill="#F2913D"/><circle cx="304" cy="106" r="7" fill="#06182A"/><circle cx="306" cy="104" r="2.4" fill="#F4EFE3"/></g>
+  </g>
+</svg>

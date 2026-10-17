@@ -1,0 +1,14 @@
+# dependencies / build
+node_modules
+dist
+*.local
+*.tsbuildinfo
+
+# ไม่ขึ้น repo สาธารณะ: เอกสารของอาจารย์ + ไฟล์ดีไซน์ต้นฉบับ/คลิป
+docs/
+design/
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db

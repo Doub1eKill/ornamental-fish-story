@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-labyrinth-title group-labyrinth-desc">
+  <title id="group-labyrinth-title">กลุ่มปลาที่มีอวัยวะช่วยหายใจ (Labyrinth fishes)</title>
+  <desc id="group-labyrinth-desc">ภาพประกอบปลากัด ตัวแทนกลุ่ม Labyrinth ลำตัวแดง ครีบยาวพลิ้วสีแดงเข้ม มีประกายสีฟ้า</desc>
+  <defs></defs>
+  <g id="group-labyrinth" class="fish">
+    <g transform="translate(16 2) scale(1.7)">
+      <path id="group-labyrinth-tail" d="M82 66 C 50 18, 20 8, 4 28 C 20 50, 10 92, 6 120 C 30 130, 62 110, 82 80 Z" fill="#9E2B3A"/>
+      <path id="group-labyrinth-fin-dorsal" d="M96 54 C 100 18, 132 12, 142 50 Z" fill="#B8323F"/>
+      <path id="group-labyrinth-fin-anal" d="M90 80 C 98 128, 140 132, 152 84 Z" fill="#9E2B3A"/>
+      <path id="group-labyrinth-body" d="M78 68 C 92 46, 150 42, 182 58 C 196 64, 196 76, 182 82 C 150 96, 92 92, 78 68 Z" fill="#E0524A"/>
+      <path id="group-labyrinth-pattern" d="M102 62 C 130 52, 160 54, 178 62" stroke="#6FB2DA" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.75"/>
+      <g id="group-labyrinth-eye"><circle cx="176" cy="64" r="5" fill="#06182A"/><circle cx="177.5" cy="62.5" r="1.6" fill="#F4EFE3"/></g>
+    </g>
+  </g>
+</svg>

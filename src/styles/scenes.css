@@ -1,0 +1,1128 @@
+/* =========================================================================
+   Layout ของฉาก · breakpoints: mobile < 768px · tablet 768–1023px · desktop ≥ 1024px
+   ========================================================================= */
+
+/* ---------------------------------------------------------------- scene shell */
+
+.scene {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  padding: var(--space-6) var(--gutter);
+  display: grid;
+  align-content: center;
+  overflow: clip;
+}
+
+/* สีน้ำทั้งหน้า — ฉากโปร่งใส ให้เห็นสีนี้ระหว่าง crossfade ภาพพื้นหลัง (สีเปลี่ยนโดย <OceanBackdrop>) */
+.ocean {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--depth-0);
+}
+
+.scene__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.scene__bg,
+.scene__fg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* เผื่อขอบบน/ล่าง 16px สำหรับ parallax ของ layer หลัง (±12px) */
+.scene__bg {
+  inset: -16px 0;
+  height: calc(100% + 32px);
+}
+
+.scene__fg {
+  object-position: bottom center;
+}
+
+/* ทำให้ข้อความครีมผ่าน AA บนพื้นน้ำตื้น (depth-0/1/2 สว่าง) */
+.scene__backdrop::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(6, 24, 42, 0.62); /* ข้อความครีม/ส้มอ่อนบนน้ำตื้น ≥ 5:1 */
+}
+
+.scene--depth-3 .scene__backdrop::after,
+.scene--depth-4 .scene__backdrop::after {
+  background: rgba(6, 24, 42, 0.3);
+}
+
+.scene__inner {
+  position: relative;
+  width: 100%;
+  min-width: 0; /* grid item: ไม่ให้ขยายตามเนื้อหากว้าง (แถบการ์ดแนวนอน) */
+  max-width: var(--content-max);
+  margin-inline: auto;
+}
+
+.scene-heading {
+  display: grid;
+  gap: var(--space-1);
+  margin-bottom: var(--space-4);
+  max-width: 900px;
+}
+
+.scene-heading__title {
+  font-size: var(--fs-h2);
+}
+
+.scene-heading__eyebrow {
+  margin-left: var(--space-1);
+}
+
+.scene-heading__subtitle,
+.scene-lead {
+  color: var(--text-muted);
+  max-width: 70ch;
+}
+
+.scene-lead {
+  margin-bottom: var(--space-4);
+}
+
+.hl-gold {
+  color: var(--accent-gold-soft);
+  font-weight: var(--fw-semibold);
+}
+
+.hl-betta {
+  color: #ff8a80; /* โทนสว่างของ --accent-betta เพื่อให้ผ่าน AA บน --surface */
+  font-weight: var(--fw-semibold);
+}
+
+.examples-label {
+  color: var(--accent-gold-soft);
+  font-weight: var(--fw-medium);
+}
+
+/* ---------------------------------------------------------------- sequence scenes (01, 03, 07) */
+
+.scene--sequence {
+  padding: 0;
+  height: 100svh;
+  min-height: 560px;
+  align-content: stretch;
+}
+
+.scene--sequence > .scene__inner {
+  max-width: none;
+  height: 100%;
+}
+
+/* ---------------------------------------------------------------- <ImageSequence> */
+
+.seq,
+.seq__poster,
+.seq__canvas,
+.seq__grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.seq {
+  background: var(--seq-fill);
+}
+
+.seq__poster {
+  object-fit: var(--fit);
+  object-position: var(--focal-x) var(--focal-y);
+}
+
+/* ตำแหน่ง/ขนาดตั้งโดย JS ให้ตรงกับเฟรม (fitRect) — ลูกด้านในใช้พิกัดเดียวกับเฟรม */
+.seq__overlay {
+  position: absolute;
+  pointer-events: none;
+}
+
+.seq__overlay svg,
+.seq__overlay .inline-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* grain บางๆ กลบความนุ่มของภาพ 720p (ภาพนิ่ง ไม่ animate) */
+.seq__grain {
+  opacity: 0.12;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 0 0.5 0 0 0 1.2 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ข้อความแต่ละช่วงของ sequence ซ้อนที่ตำแหน่งเดียวกัน — class ใส่โดย <ImageSequence> เมื่อเล่นได้ (ไม่ใส่ตอน reduced motion) */
+.is-sequenced .seq-copy {
+  grid-template-areas: "stack";
+}
+
+.is-sequenced .seq-copy__step {
+  grid-area: stack;
+  align-self: center;
+}
+
+/* ---------------------------------------------------------------- 01 Hero */
+
+/* ภาพเฟรมแรกครึ่งบนสว่างมาก → overlay ซ้ายเข้มกว่า --overlay-left เพื่อให้ข้อความครีมผ่าน AA ทั้งคอลัมน์ x 6–40% */
+.scene--hero .scene__backdrop::after {
+  background: linear-gradient(90deg, rgba(6, 24, 42, 0.85) 0%, rgba(6, 24, 42, 0.72) 36%, rgba(6, 24, 42, 0) 62%);
+}
+
+.hero__phrase {
+  display: inline-block;
+}
+
+.scene--hero .seq-copy {
+  position: absolute;
+  left: 6%;
+  top: 50%;
+  width: min(34%, 560px);
+  transform: translateY(-50%);
+  display: grid;
+  gap: var(--space-3);
+}
+
+.hero__title {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+  margin-top: var(--space-1);
+}
+
+.hero__title:focus {
+  outline: none;
+}
+
+.hero__definition {
+  color: var(--text);
+}
+
+.hero__instructor {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+}
+
+.hero__affiliation {
+  color: var(--text-muted);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+}
+
+.scroll-prompt {
+  position: absolute;
+  left: 50%;
+  bottom: var(--space-4);
+  transform: translateX(-50%);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-pill);
+  color: var(--text);
+  font-size: var(--fs-caption);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+}
+
+/* ---------------------------------------------------------------- 02 ลักษณะของปลา */
+
+.trait-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-2);
+}
+
+.trait-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-2);
+  align-items: start;
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(15, 42, 60, 0.82);
+}
+
+.trait-card__index {
+  font-family: var(--font-display-alt);
+  font-weight: var(--fw-semibold);
+  color: var(--accent-gold);
+  line-height: var(--lh-body);
+}
+
+/* ---------------------------------------------------------------- 03 อวัยวะภายนอก */
+
+/* พื้นเฟรมเข้มอยู่แล้ว — เงาเฉพาะมุมซ้ายบนหลังหัวข้อ ไม่ทับตัวปลา */
+.scene--anatomy .scene__backdrop::after {
+  background: radial-gradient(ellipse 50% 40% at 0% 0%, rgba(6, 24, 42, 0.7), rgba(6, 24, 42, 0));
+}
+
+.scene--anatomy .scene-heading {
+  position: absolute;
+  top: 6%;
+  left: 6%;
+  z-index: 2;
+  margin: 0;
+}
+
+.anatomy-overlay .anchor-dot {
+  r: 7px;
+}
+
+.anatomy-chips {
+  /* desktop: label อยู่ใน SVG แล้ว — รายการนี้ให้ screen reader อ่าน */
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.anatomy-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.anatomy-chip__index {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  color: var(--text-on-light);
+  font-size: 13px;
+  font-weight: var(--fw-semibold);
+}
+
+/* ---------------------------------------------------------------- 04 ปลาเขตร้อน */
+
+.card-rail__track {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-3);
+}
+
+.fish-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+}
+
+/* ---- ภาพถ่ายปลา (<FishPhoto>) ใช้ทั้งการ์ดฉาก 04 และฉาก 05 ---- */
+
+/*
+ * mask บนกรอบ (ไม่ใช่ <img>) ขอบภาพจึงจางเสมอแม้ <img> ขยายตอน hover
+ * วงรีทึบถึง 58% แล้วจางหมดที่ขอบ → ไม่เห็นกรอบสี่เหลี่ยม และพื้นหลังภาพที่เข้มไม่เท่ากันกลืนเข้ากับพื้นการ์ด/ฉาก
+ * ปลาในภาพกว้างราว 65% ของเฟรมอยู่กึ่งกลาง ส่วนหางที่ปลายจางลงเพียงเล็กน้อย
+ */
+.fish-photo {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 58%, transparent 100%);
+  mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 58%, transparent 100%);
+}
+
+.fish-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 500ms var(--ease-out);
+}
+
+/* fallback SVG (ภาพประกอบพื้นโปร่งใส 5:3) — แสดงทั้งตัว ไม่ครอป ไม่ต้อง mask */
+.fish-photo--fallback {
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.fish-photo--fallback img {
+  object-fit: contain;
+}
+
+.fish-card:hover .fish-photo img,
+.fish-card:active .fish-photo img,
+.cold-fish:hover .fish-photo img,
+.cold-fish:active .fish-photo img {
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fish-photo img {
+    transition: none;
+  }
+
+  .fish-card:hover .fish-photo img,
+  .fish-card:active .fish-photo img,
+  .cold-fish:hover .fish-photo img,
+  .cold-fish:active .fish-photo img {
+    transform: none;
+  }
+}
+
+.card-rail__progress {
+  display: none;
+}
+
+/* แนวนอน (class ใส่โดย TropicalScene เมื่อจอ ≥ 768px และไม่ลด motion) */
+.scene--tropical.is-rail {
+  height: 100svh;
+  min-height: 600px;
+  padding-block: var(--space-5) var(--space-4);
+  align-content: center;
+}
+
+.is-rail .scene-heading {
+  margin-bottom: var(--space-3);
+}
+
+.is-rail .card-rail__track {
+  display: flex;
+  width: max-content;
+  gap: var(--space-3);
+  padding-block: var(--space-2); /* เผื่อการ์ดที่ขยาย 1.04 */
+}
+
+.is-rail .fish-card {
+  flex: none;
+  width: clamp(280px, 24vw, 340px);
+  transition: transform 400ms var(--ease-out), border-color 400ms var(--ease-out);
+}
+
+.is-rail .fish-card.is-active {
+  transform: scale(1.04);
+  border-color: var(--accent-gold);
+}
+
+.is-rail .card-rail {
+  position: relative;
+}
+
+/* มุมขวาบนเหนือแถบการ์ด (ข้างหัวข้อรอง) — ไม่กินความสูงของจอ */
+.is-rail .card-rail__progress {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  margin-bottom: var(--space-1);
+  font-family: var(--font-display-alt);
+  font-size: var(--fs-caption);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-eyebrow);
+  color: var(--accent-gold-soft);
+}
+
+.fish-card__title {
+  font-size: var(--fs-h3);
+}
+
+.fish-card__points {
+  padding-left: 1.2em;
+  display: grid;
+  gap: var(--space-1);
+  color: var(--text-muted);
+}
+
+.fish-card__examples {
+  margin-top: auto;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--border);
+}
+
+/* ---------------------------------------------------------------- 05 ปลาเขตหนาว */
+
+.cold-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: start;
+  gap: var(--space-5);
+}
+
+.cold-fish {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.cold-fish__name {
+  font-size: var(--fs-h3);
+  color: var(--accent-gold-soft);
+  margin-bottom: var(--space-1);
+}
+
+/* ---------------------------------------------------------------- 06 พรรณไม้น้ำ */
+
+.labeled-diagram {
+  margin: 0;
+}
+
+.labeled-diagram__svg svg {
+  width: 100%;
+  height: auto;
+}
+
+.plants-diagram,
+.plants-photo {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+
+/* ---- <AnnotatedPhoto>: ภาพจริง + ป้าย HTML ---- */
+
+.annotated {
+  position: relative;
+  aspect-ratio: var(--photo-ratio);
+  overflow: hidden;
+  margin-top: 0;
+  margin-inline: 0; /* margin-bottom มาจาก class ของฉาก (เช่น .plants-photo) */
+}
+
+/* สัดส่วนเท่าภาพเสมอ — ถ้ากล่องนอกแคบกว่า (มือถือ) จะล้นแล้วถูกตัดซ้าย-ขวาเท่ากัน */
+.annotated__frame {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  aspect-ratio: var(--photo-ratio);
+  transform: translateX(-50%);
+}
+
+.annotated__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.annotated__overlay,
+.annotated__leaders {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.annotated__leaders {
+  overflow: visible;
+}
+
+.annotated__leader {
+  stroke: var(--text);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  filter: drop-shadow(0 1px 2px rgba(6, 24, 42, 0.8));
+}
+
+.annotated__guide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-top: 2px dashed rgba(143, 211, 204, 0.9); /* --depth-0 */
+}
+
+.annotated__guide-label {
+  position: absolute;
+  left: 1.5%; /* ฝั่งซ้าย (ตลิ่ง) — ฝั่งขวามีจุดพืชลอยน้ำ */
+  bottom: 6px;
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--depth-0);
+  text-shadow: 0 1px 3px rgba(6, 24, 42, 0.95), 0 0 8px rgba(6, 24, 42, 0.8);
+}
+
+/* จุด: จัดกึ่งกลางด้วย margin (ไม่ใช้ transform — animation scale ใช้ transform) */
+.annotated__dot {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--depth-4);
+  border-radius: 50%;
+  background: var(--accent-gold);
+  color: var(--text-on-light);
+  font-size: 14px;
+  font-weight: var(--fw-semibold);
+  line-height: 1;
+  box-shadow: 0 0 0 4px rgba(242, 145, 61, 0.25);
+}
+
+.annotated__label {
+  --tx: 0;
+  --ty: 0;
+  position: absolute;
+  width: max-content;
+  max-width: 22%; /* ของความกว้างภาพ — ป้ายไม่ล้นขอบ ข้อความยาวขึ้นบรรทัดใหม่ */
+  transform: translate(var(--tx), var(--ty));
+}
+
+.annotated__label--center { --tx: -50%; }
+.annotated__label--end { --tx: -100%; }
+.annotated__label--above { --ty: -100%; }
+.annotated__label--middle { --ty: -50%; }
+
+/* แถบพื้นโปร่งเข้ม + เงาตัวอักษร: ข้อความครีมบนภาพผ่าน AA ไม่ว่าพื้นภาพจะสว่างแค่ไหน */
+.annotated__box {
+  display: grid;
+  gap: 2px;
+  padding: 8px 12px;
+  border: 1px solid rgba(244, 239, 227, 0.18);
+  border-radius: var(--radius-sm);
+  background: rgba(6, 24, 42, 0.74);
+  backdrop-filter: blur(4px);
+  text-shadow: 0 1px 2px rgba(6, 24, 42, 0.9);
+}
+
+.annotated__title {
+  font-family: var(--font-display);
+  font-size: clamp(15px, 1.4vw, 19px);
+  font-weight: var(--fw-semibold);
+  line-height: var(--lh-heading);
+  color: var(--text);
+}
+
+.annotated__en {
+  font-size: clamp(12px, 1vw, 14px);
+  color: var(--text-muted);
+}
+
+.annotated__examples {
+  font-size: clamp(12px, 1vw, 14px);
+  color: var(--plant);
+}
+
+.plant-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+}
+
+.plant-card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+}
+
+.plant-card__title {
+  font-size: var(--fs-h3);
+  color: var(--plant);
+}
+
+.plant-card__en {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: var(--fw-medium);
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------- 07 การจัดตู้ */
+
+/* ข้อความคอลัมน์ซ้าย x 5–36% บนพื้นสีน้ำเงินเข้มของเฟรม (นอกตู้) */
+.scene--aquascape .scene__backdrop::after {
+  background: linear-gradient(90deg, rgba(6, 24, 42, 0.6) 0%, rgba(6, 24, 42, 0.35) 36%, rgba(6, 24, 42, 0) 46%);
+}
+
+.aqua-copy {
+  display: grid;
+  gap: var(--space-3);
+  width: min(36%, 520px);
+  margin-left: 5%;
+}
+
+/* sequence เล่นอยู่: ทีละช่วง กึ่งกลางแนวตั้ง */
+.scene--aquascape.is-sequenced .aqua-copy {
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  margin: 0;
+  width: min(31%, 460px);
+  transform: translateY(-50%);
+}
+
+/* reduced motion: ทุกช่วงแสดงพร้อมกัน → ฉากสูงตามเนื้อหา */
+.scene--aquascape:not(.is-sequenced) {
+  height: auto;
+  min-height: 100svh;
+  padding-block: var(--space-6);
+}
+
+.zone-rect rect {
+  fill: rgba(244, 239, 227, 0.06);
+  stroke: var(--text);
+  stroke-width: 2;
+  stroke-dasharray: 8 8;
+}
+
+.zone-rect text {
+  font-family: var(--font-body);
+  font-size: 20px;
+  font-weight: var(--fw-semibold);
+  fill: var(--text);
+  paint-order: stroke;
+  stroke: rgba(6, 24, 42, 0.8);
+  stroke-width: 4px;
+}
+
+.zone-item {
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--plant);
+  background: rgba(15, 42, 60, 0.7);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+}
+
+.zone-item__title,
+.rules__title {
+  font-size: var(--fs-h3);
+  color: var(--plant);
+  margin-bottom: 4px;
+}
+
+.zone-item__examples {
+  margin-top: var(--space-1);
+  color: var(--text-muted);
+}
+
+.rules__list {
+  padding-left: 1.4em;
+  display: grid;
+  gap: 4px;
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+}
+
+/* ---------------------------------------------------------------- 08 ปัจจัย */
+
+.factor-grid {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-2);
+}
+
+.factor-card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  font-size: var(--fs-label);
+  line-height: var(--lh-label);
+  overflow-wrap: anywhere;
+}
+
+.factor-card__icon {
+  width: 40px;
+  height: 40px;
+  color: var(--plant);
+}
+
+.factor-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.factor-card__title {
+  font-size: var(--fs-h3);
+}
+
+.ph-bar {
+  margin-top: var(--space-1);
+}
+
+.ph-bar__track {
+  position: relative;
+  height: 12px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(90deg, #e0524a, #f2913d 25%, #f2d43d 40%, #7cc49a 50%, #3a9c9c 70%, #4b5ec7 85%, #7a4bc7);
+  opacity: 0.9;
+}
+
+.ph-bar__range {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  border: 2px solid var(--text);
+  border-radius: var(--radius-pill);
+  box-shadow: 0 0 0 2px var(--surface);
+}
+
+.ph-bar__scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------- 09 Ending */
+
+.ending {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.ending__question {
+  font-size: var(--fs-display);
+  line-height: var(--lh-display);
+}
+
+.ending__topics {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-2);
+  max-width: 960px;
+}
+
+.ending__topics li {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  background: rgba(15, 42, 60, 0.8);
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 48px;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--accent-gold);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+/* ถ้า Tab มาถึงก่อน reveal ต้องเห็นปุ่ม (ทับ opacity inline ของ GSAP) */
+.back-to-top:focus-visible {
+  opacity: 1 !important;
+}
+
+.back-to-top:hover {
+  background: rgba(242, 145, 61, 0.15);
+}
+
+/* ---------------------------------------------------------------- scene indicator */
+
+.scene-indicator {
+  position: fixed;
+  top: var(--space-2);
+  right: var(--space-2);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px var(--space-2);
+  border-radius: var(--radius-pill);
+  background: var(--indicator-bg);
+  backdrop-filter: blur(6px);
+}
+
+.scene-indicator__count {
+  font-family: var(--font-display-alt);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.scene-indicator__list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 2px;
+}
+
+/* พื้นที่กด 24×24px ตาม WCAG 2.2 target size */
+.scene-indicator__dot {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+}
+
+.scene-indicator__dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  opacity: 0.6;
+  transition: transform var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
+}
+
+.scene-indicator__dot[aria-current]::before {
+  background: var(--accent-gold);
+  opacity: 1;
+  transform: scale(1.5);
+}
+
+/* desktop แคบ: 5 คอลัมน์แคบเกินไปสำหรับข้อความไทยยาว */
+@media (max-width: 1279px) {
+  .factor-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* =========================================================================
+   Tablet 768–1023px
+   ========================================================================= */
+
+@media (max-width: 1023px) {
+  .trait-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .plant-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .factor-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .factor-card[data-factor="light"] {
+    grid-column: 1 / -1;
+  }
+
+  .scene--hero .seq-copy {
+    width: min(44%, 520px);
+  }
+
+  .scene--aquascape.is-sequenced .aqua-copy {
+    width: 40%;
+  }
+}
+
+/* =========================================================================
+   Mobile < 768px
+   ========================================================================= */
+
+@media (max-width: 767px) {
+  .scene {
+    padding: var(--space-5) var(--gutter);
+  }
+
+  .trait-grid,
+  .plant-list,
+  .factor-grid,
+  .cold-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cold-grid {
+    gap: var(--space-4);
+  }
+
+  /* Hero: ข้อความโซนบน (y 8–36%) บน --overlay-top */
+  /* --overlay-top จางหมดที่ 42% แต่ Phase 1 ข้อความ 3 ช่วงยังซ้อนกันยาวถึง ~55% จึงยืด overlay ลงมา */
+  .scene--hero .scene__backdrop::after {
+    background: linear-gradient(180deg, rgba(6, 24, 42, 0.85) 0%, rgba(6, 24, 42, 0.6) 45%, rgba(6, 24, 42, 0) 65%);
+  }
+
+  .scene--hero .seq-copy {
+    left: var(--gutter);
+    right: var(--gutter);
+    top: 8%;
+    width: auto;
+    transform: none;
+    gap: var(--space-2);
+  }
+
+  .seq__poster {
+    object-fit: var(--fit-mobile);
+    object-position: var(--focal-x-mobile) var(--focal-y-mobile);
+  }
+
+  /* ข้อความทีละช่วงอยู่โซนบน y 8–36% → ใช้ --overlay-top ตาม spec */
+  .scene--hero.is-sequenced .scene__backdrop::after {
+    background: var(--overlay-top);
+  }
+
+  .is-sequenced .seq-copy__step {
+    align-self: start;
+  }
+
+  .hero__definition {
+    font-size: var(--fs-label);
+    line-height: var(--lh-label);
+  }
+
+  .scroll-prompt {
+    bottom: var(--space-3);
+  }
+
+  /* Anatomy: หัวข้อ y 6–20% · ปลา y 38–62% · ชิป y 66–80% */
+  .scene--anatomy .scene-heading {
+    left: var(--gutter);
+    right: var(--gutter);
+  }
+
+  /* เฟรมย่อเหลือ ~1/3 — ข้อความใน SVG เล็กเกินอ่าน ใช้ชิปแทน · ขยายจุดให้เห็นชัด */
+  .anatomy-overlay .anatomy-label text,
+  .anatomy-overlay .anatomy-label .leader {
+    display: none;
+  }
+
+  .anatomy-overlay .anchor-dot {
+    r: 16px;
+    stroke-width: 6px;
+  }
+
+  .anatomy-chips {
+    position: absolute !important;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    left: var(--gutter);
+    right: var(--gutter);
+    top: 66%;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+    font-size: var(--fs-caption);
+  }
+
+  .anatomy-chip {
+    padding: 4px 10px 4px 4px;
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+  }
+
+  /* ชิปทีละอัน ซ้อนตำแหน่งเดียวกัน */
+  .is-sequenced .anatomy-chips {
+    display: grid;
+    font-size: var(--fs-body);
+  }
+
+  .is-sequenced .anatomy-chip {
+    grid-area: 1 / 1;
+    justify-self: start;
+  }
+
+  /* Plants: ซ่อน label ใน SVG — การ์ด 4 ข้อด้านล่างทำหน้าที่แทน */
+  .plants-diagram .diagram-label {
+    display: none;
+  }
+
+  /*
+   * ภาพจริงบนมือถือ: กล่อง 3:2 → ภาพ (16:9) cover โฟกัสกลาง เห็นช่วง x ≈ 8–92% จุดทั้ง 4 (21–88%) ยังอยู่ในภาพ
+   * เหลือเฉพาะจุดตัวเลข 1–4 — ชื่อ/คำอธิบายอยู่ในการ์ดเรียงด้านล่าง (หัวการ์ดขึ้นต้นด้วยเลขเดียวกัน)
+   */
+  .plants-photo {
+    aspect-ratio: 3 / 2;
+  }
+
+  .plants-photo .annotated__label,
+  .plants-photo .annotated__leaders {
+    display: none;
+  }
+
+  .plants-photo .annotated__dot {
+    width: 26px;
+    height: 26px;
+    margin: -13px 0 0 -13px;
+  }
+
+  /* ภาพถูกตัดซ้าย-ขวาข้างละ ~8% (16:9 ในกล่อง 3:2) → เลื่อนป้ายผิวน้ำเข้ามาให้พ้นขอบ */
+  .plants-photo .annotated__guide-label {
+    left: 10%;
+  }
+
+  /* Aquascape: ข้อความโซนบน y 8–38% บน --overlay-top · ตู้กลางจอ (focal x 68%) */
+  .scene--aquascape .scene__backdrop::after {
+    background: var(--overlay-top);
+  }
+
+  .aqua-copy {
+    width: auto;
+    margin: 0 var(--gutter);
+  }
+
+  .scene--aquascape.is-sequenced .aqua-copy {
+    top: 6%;
+    left: var(--gutter);
+    right: var(--gutter);
+    width: auto;
+    transform: none;
+  }
+
+  .scene--aquascape.is-sequenced .seq-copy__step {
+    align-self: start;
+  }
+
+  /* ช่วงโซน: ย่อเหลือชื่อโซน + ตัวอย่างชนิด */
+  .scene--aquascape.is-sequenced .zone-item__body {
+    display: none;
+  }
+
+  .scene--aquascape .scene-lead,
+  .rules__list {
+    font-size: var(--fs-caption);
+    line-height: var(--lh-label);
+  }
+
+  .scene--aquascape:not(.is-sequenced) .scene__backdrop::after {
+    background: rgba(6, 24, 42, 0.7);
+  }
+
+  .scene-indicator__list {
+    display: none;
+  }
+}

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-loaches-title group-loaches-desc">
+  <title id="group-loaches-title">กลุ่มปลาหมู (Loaches)</title>
+  <desc id="group-loaches-desc">ภาพประกอบปลาหมูข้างลาย ตัวแทนกลุ่มปลาหมู ลำตัวยาวสีน้ำตาลอ่อนมีแถบเข้ม ปากอยู่ต่ำ มีหนวดรอบปาก</desc>
+  <defs><clipPath id="loa-clip"><path d="M100 128 C130 100 260 92 316 112 C334 118 336 134 318 138 C250 148 140 148 100 128 Z"/></clipPath></defs>
+  <g id="group-loaches" class="fish">
+    <path id="group-loaches-tail" d="M104 128 L68 102 L84 128 L68 154 Z" fill="#C9A66B"/>
+    <path id="group-loaches-fin-dorsal" d="M196 102 C204 84 226 84 234 102 Z" fill="#B89A6A"/>
+    <path id="group-loaches-fin-pelvic" d="M210 144 C214 160 230 162 234 144 Z" fill="#B89A6A"/>
+    <path id="group-loaches-body" d="M100 128 C130 100 260 92 316 112 C334 118 336 134 318 138 C250 148 140 148 100 128 Z" fill="#D6B98A"/>
+    <g id="group-loaches-pattern" clip-path="url(#loa-clip)" fill="#5A4632">
+      <rect x="128" y="80" width="12" height="80"/><rect x="166" y="80" width="12" height="80"/>
+      <rect x="204" y="80" width="12" height="80"/><rect x="242" y="80" width="12" height="80"/><rect x="280" y="80" width="10" height="80"/>
+    </g>
+    <path id="group-loaches-head-spine" d="M298 126 L316 118" stroke="#5A4632" stroke-width="3" stroke-linecap="round"/>
+    <g id="group-loaches-barbels" stroke="#8C6F4E" stroke-width="2" stroke-linecap="round">
+      <path d="M326 136 L340 150"/><path d="M322 138 L330 154"/><path d="M316 138 L318 154"/>
+    </g>
+    <path id="group-loaches-mouth" d="M320 136 C326 138 332 138 334 134" stroke="#5A4632" stroke-width="2.4" fill="none"/>
+    <g id="group-loaches-eye"><circle cx="312" cy="118" r="6" fill="#06182A"/><circle cx="313.5" cy="116.5" r="1.8" fill="#F4EFE3"/></g>
+  </g>
+</svg>

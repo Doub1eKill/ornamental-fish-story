@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-livebearers-title group-livebearers-desc">
+  <title id="group-livebearers-title">กลุ่มปลาออกลูกเป็นตัว (Livebearers)</title>
+  <desc id="group-livebearers-desc">ภาพประกอบปลาหางนกยูงตัวผู้ ตัวแทนกลุ่มปลาออกลูกเป็นตัว หางแผ่กว้างสีฟ้ามีจุด และมีก้านครีบก้นยื่นยาว (gonopodium)</desc>
+  <defs></defs>
+  <g id="group-livebearers" class="fish">
+    <path id="group-livebearers-tail" d="M200 120 C170 70 110 50 70 60 C80 100 80 150 70 190 C110 196 170 172 200 128 Z" fill="#4E8FC7"/>
+    <g id="group-livebearers-pattern" fill="#1F4E7A">
+      <circle cx="120" cy="90" r="5"/><circle cx="104" cy="122" r="6"/><circle cx="126" cy="152" r="5"/>
+      <circle cx="150" cy="110" r="4"/><circle cx="152" cy="140" r="4"/><circle cx="96" cy="160" r="4"/>
+    </g>
+    <path id="group-livebearers-fin-dorsal" d="M218 108 C230 84 262 86 272 106 Z" fill="#4E8FC7"/>
+    <path id="group-livebearers-body" d="M190 122 C210 104 290 100 320 114 C332 120 332 130 318 134 C290 144 210 142 190 122 Z" fill="#B9C7C8"/>
+    <ellipse id="group-livebearers-body-patch" cx="236" cy="122" rx="20" ry="8" fill="#F2913D"/>
+    <path id="group-livebearers-gonopodium" d="M244 138 L218 160" stroke="#8FA0A2" stroke-width="3" stroke-linecap="round"/>
+    <g id="group-livebearers-eye"><circle cx="312" cy="116" r="6" fill="#06182A"/><circle cx="313.5" cy="114.5" r="1.8" fill="#F4EFE3"/></g>
+  </g>
+</svg>

@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="การเลี้ยงปลาสวยงาม — สไลด์เล่าเรื่องแบบเลื่อนหน้าจอ" />
+    <meta name="theme-color" content="#06182A" />
+    <title>การเลี้ยงปลาสวยงาม</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- โหลดฟอนต์แบบไม่บล็อกการ render (display=swap แสดงฟอนต์สำรองก่อน) · เฉพาะน้ำหนักที่ใช้จริง -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@600&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Anuphan:wght@600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Thai:wght@600&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=Anuphan:wght@600&display=swap"
+      />
+    </noscript>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" as="image" href="/sequences/seq-1-hero/0001.webp" fetchpriority="high" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

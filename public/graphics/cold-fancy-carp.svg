@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="cold-fancy-carp-title cold-fancy-carp-desc">
+  <title id="cold-fancy-carp-title">ปลาแฟนซีคาร์ป (Fancy Carp)</title>
+  <desc id="cold-fancy-carp-desc">ภาพประกอบปลาแฟนซีคาร์ป ลำตัวยาวสีขาวครีมมีลายแดง มีหนวดที่ปาก</desc>
+  <defs><clipPath id="koi-clip"><path d="M80 124 C110 90 260 82 330 104 C350 110 352 128 334 136 C260 154 120 156 80 124 Z"/></clipPath></defs>
+  <g id="cold-fancy-carp" class="fish">
+    <path id="cold-fancy-carp-tail" d="M84 124 C60 100 40 92 28 96 C40 112 40 136 28 152 C40 156 60 148 84 124 Z" fill="#E6DCC8"/>
+    <path id="cold-fancy-carp-fin-dorsal" d="M156 98 C200 76 252 76 282 94 Z" fill="#E6DCC8"/>
+    <path id="cold-fancy-carp-fin-pelvic" d="M200 146 C204 166 222 168 226 146 Z" fill="#E6DCC8"/>
+    <path id="cold-fancy-carp-body" d="M80 124 C110 90 260 82 330 104 C350 110 352 128 334 136 C260 154 120 156 80 124 Z" fill="#F4EFE3"/>
+    <g id="cold-fancy-carp-pattern" clip-path="url(#koi-clip)" fill="#D6453D">
+      <ellipse cx="190" cy="100" rx="44" ry="18"/><ellipse cx="282" cy="100" rx="26" ry="13"/><ellipse cx="134" cy="128" rx="20" ry="10"/>
+    </g>
+    <path id="cold-fancy-carp-fin-pectoral" d="M300 134 C284 150 276 162 282 164 C294 156 306 144 310 136 Z" fill="#E6DCC8"/>
+    <path id="cold-fancy-carp-barbels" d="M344 124 L362 134" stroke="#C9B89A" stroke-width="2.4" stroke-linecap="round"/>
+    <g id="cold-fancy-carp-eye"><circle cx="330" cy="112" r="6" fill="#06182A"/><circle cx="331.5" cy="110.5" r="1.8" fill="#F4EFE3"/></g>
+  </g>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-cyprinids-title group-cyprinids-desc">
+  <title id="group-cyprinids-title">กลุ่มปลาตะเพียนและปลาซิว (Cyprinids)</title>
+  <desc id="group-cyprinids-desc">ภาพประกอบปลาตัวแทนกลุ่มตะเพียน-ซิว ทรงลำตัวลึก สีเหลืองทองมีแถบดำพาดขวาง 4 แถบ ครีบสีแดง</desc>
+  <defs><clipPath id="cyp-clip"><path d="M112 120 C130 70 230 50 300 84 C330 98 336 132 304 150 C236 186 136 170 112 120 Z"/></clipPath></defs>
+  <g id="group-cyprinids" class="fish">
+    <path id="group-cyprinids-tail" d="M118 120 L70 78 C80 104 80 136 70 162 Z" fill="#E86A3A"/>
+    <path id="group-cyprinids-fin-dorsal" d="M190 70 C200 40 236 38 250 72 Z" fill="#2B2B2B"/>
+    <path id="group-cyprinids-fin-anal" d="M168 158 C170 182 196 188 202 160 Z" fill="#E0524A"/>
+    <path id="group-cyprinids-fin-pelvic" d="M220 164 C222 186 240 192 248 166 Z" fill="#E0524A"/>
+    <path id="group-cyprinids-body" d="M112 120 C130 70 230 50 300 84 C330 98 336 132 304 150 C236 186 136 170 112 120 Z" fill="#E9B44C"/>
+    <g id="group-cyprinids-pattern" clip-path="url(#cyp-clip)" fill="#2B2B2B">
+      <rect x="140" y="40" width="16" height="160" transform="rotate(8 148 120)"/>
+      <rect x="196" y="40" width="18" height="160" transform="rotate(8 205 120)"/>
+      <rect x="250" y="40" width="16" height="160" transform="rotate(8 258 120)"/>
+      <rect x="300" y="40" width="12" height="160" transform="rotate(8 306 120)"/>
+    </g>
+    <path id="group-cyprinids-highlight" d="M150 146 C200 166 256 160 298 146" stroke="#F6D58A" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path id="group-cyprinids-fin-pectoral" d="M278 132 C262 140 256 152 262 156 C272 148 284 140 288 134 Z" fill="#F4A259"/>
+    <g id="group-cyprinids-eye"><circle cx="314" cy="108" r="10" fill="#E0524A"/><circle cx="314" cy="108" r="6" fill="#06182A"/><circle cx="316" cy="106" r="2" fill="#F4EFE3"/></g>
+  </g>
+</svg>

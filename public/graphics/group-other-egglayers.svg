@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-other-egglayers-title group-other-egglayers-desc">
+  <title id="group-other-egglayers-title">กลุ่มปลาสวยงามน้ำจืดชนิดที่วางไข่อื่นๆ</title>
+  <desc id="group-other-egglayers-desc">ภาพประกอบปลาตะพัด (อะโรวานา) ตัวแทนกลุ่มปลาวางไข่อื่นๆ ลำตัวยาวสีทอง เกล็ดใหญ่ ปากเชิดมีหนวดคู่</desc>
+  <defs><clipPath id="aro-clip"><path d="M70 120 C100 92 260 84 340 98 C360 102 364 116 348 124 C260 140 110 144 70 120 Z"/></clipPath><pattern id="aro-scales" width="22" height="16" patternUnits="userSpaceOnUse"><path d="M0 16 A11 11 0 0 1 22 16" fill="none" stroke="#9C7A2C" stroke-width="2"/></pattern></defs>
+  <g id="group-other-egglayers" class="fish">
+    <path id="group-other-egglayers-tail" d="M74 120 C60 104 40 100 30 106 C38 116 38 126 30 136 C40 142 60 136 74 120 Z" fill="#B88A3A"/>
+    <path id="group-other-egglayers-fin-dorsal" d="M86 112 C96 92 130 92 142 106 Z" fill="#B88A3A"/>
+    <path id="group-other-egglayers-fin-anal" d="M86 128 C96 152 132 152 144 134 Z" fill="#B88A3A"/>
+    <path id="group-other-egglayers-body" d="M70 120 C100 92 260 84 340 98 C360 102 364 116 348 124 C260 140 110 144 70 120 Z" fill="#C9A04A"/>
+    <rect id="group-other-egglayers-pattern" x="60" y="80" width="300" height="70" fill="url(#aro-scales)" clip-path="url(#aro-clip)"/>
+    <path id="group-other-egglayers-fin-pectoral" d="M318 126 C300 142 288 154 294 156 C306 148 318 138 324 128 Z" fill="#B88A3A"/>
+    <g id="group-other-egglayers-barbels" stroke="#9C7A2C" stroke-width="2.4" stroke-linecap="round"><path d="M352 100 L374 84"/><path d="M348 102 L366 90"/></g>
+    <path id="group-other-egglayers-mouth" d="M348 104 L366 98" stroke="#7A5E22" stroke-width="2.4" stroke-linecap="round"/>
+    <g id="group-other-egglayers-eye"><circle cx="334" cy="108" r="7" fill="#06182A"/><circle cx="335.5" cy="106.5" r="2" fill="#F4EFE3"/></g>
+  </g>
+</svg>

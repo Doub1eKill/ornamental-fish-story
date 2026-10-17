@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="tz-title tz-desc">
+  <title id="tz-title">การจัดตู้พรรณไม้น้ำ 3 โซน</title>
+  <desc id="tz-desc">ภาพตัดด้านข้างของตู้ ผู้ชมอยู่ด้านซ้าย โซนหน้าตู้มีพืชเตี้ย โซนกลางตู้มีพืชเป็นพุ่ม โซนหลังตู้มีพืชสูง พื้นลาดสูงขึ้นไปทางด้านหลัง</desc>
+  <rect id="background" width="1600" height="900" fill="#06182A"/>
+  <g id="viewer" stroke="#C9D6D3" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M80 440 C110 410 150 410 180 440 C150 470 110 470 80 440 Z"/><circle cx="130" cy="440" r="12" fill="#C9D6D3"/>
+    <path d="M200 440 H270" stroke-dasharray="10 10"/>
+  </g>
+  <text id="viewer-label" x="130" y="510" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">ผู้ชม</text>
+  <rect id="tank" x="300" y="180" width="1180" height="560" fill="#0F3E55" stroke="#C9D6D3" stroke-width="4"/>
+  <line id="waterline" x1="300" y1="220" x2="1480" y2="220" stroke="#8FD3CC" stroke-width="3"/>
+  <path id="substrate" d="M300 740 V680 C700 670 1100 640 1480 610 V740 Z" fill="#B59A72"/>
+
+  <g id="zone-front" class="zone" data-order="1">
+    <rect x="300" y="220" width="393" height="520" fill="#F2913D" opacity="0"/>
+    <g id="plants-front">
+      <ellipse cx="420" cy="676" rx="80" ry="12" fill="#7CC49A"/>
+      <path d="M540 676 v-34 M552 676 v-44 M564 676 v-30 M576 676 v-40 M588 676 v-28" stroke="#9FD7A8" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </g>
+  <g id="zone-middle" class="zone" data-order="2">
+    <rect x="693" y="220" width="393" height="520" fill="#F2913D" opacity="0"/>
+    <g id="plants-middle">
+      <circle cx="790" cy="600" r="54" fill="#4FA176"/><circle cx="840" cy="566" r="40" fill="#7CC49A"/>
+      <circle cx="960" cy="590" r="50" fill="#A3473A"/><circle cx="1010" cy="606" r="34" fill="#C9D6A0"/>
+    </g>
+  </g>
+  <g id="zone-back" class="zone" data-order="3">
+    <rect x="1086" y="220" width="394" height="520" fill="#F2913D" opacity="0"/>
+    <g id="plants-back" stroke-linecap="round" fill="none">
+      <path d="M1160 640 C1150 520 1170 400 1150 260" stroke="#4FA176" stroke-width="12"/>
+      <path d="M1200 640 C1214 520 1196 380 1222 250" stroke="#7CC49A" stroke-width="12"/>
+      <path d="M1400 620 C1390 500 1420 380 1400 250" stroke="#2F7A5A" stroke-width="14"/>
+      <ellipse cx="1300" cy="440" rx="40" ry="80" fill="#8E3B33" stroke="none"/>
+    </g>
+  </g>
+  <g id="zone-dividers" stroke="#C9D6D3" stroke-width="2" stroke-dasharray="8 10" opacity="0.6">
+    <line x1="693" y1="230" x2="693" y2="740"/><line x1="1086" y1="230" x2="1086" y2="740"/>
+  </g>
+
+  <g id="label-front" class="diagram-label" data-order="1">
+    <text x="496" y="80" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="34" font-weight="600" fill="#F4EFE3">หน้าตู้</text>
+    <text x="496" y="116" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">เตี้ย โตช้า</text>
+    <text x="496" y="146" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="20" fill="#9FC3C0">พรมมิ · หญ้าหัวไม้ขีด</text>
+    <text x="496" y="800" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">ด้านหน้า (กระจกฝั่งผู้ชม)</text>
+  </g>
+  <g id="label-middle" class="diagram-label" data-order="2">
+    <text x="890" y="80" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="34" font-weight="600" fill="#F4EFE3">กลางตู้</text>
+    <text x="890" y="116" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">เป็นพุ่ม โตปานกลาง</text>
+    <text x="890" y="146" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="20" fill="#9FC3C0">ดาวกระจาย · ผักเป็ดแดง · ขาไก่ด่าง</text>
+  </g>
+  <g id="label-back" class="diagram-label" data-order="3">
+    <text x="1283" y="80" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="34" font-weight="600" fill="#F4EFE3">หลังตู้</text>
+    <text x="1283" y="116" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">สูง โตเร็ว</text>
+    <text x="1283" y="146" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="20" fill="#9FC3C0">เทปยักษ์ · สาหร่ายพุงชะโด · บอนแดง</text>
+    <text x="1283" y="800" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">ด้านหลัง</text>
+  </g>
+</svg>

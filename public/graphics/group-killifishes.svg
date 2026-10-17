@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-killifishes-title group-killifishes-desc">
+  <title id="group-killifishes-title">กลุ่มปลาคิลลีฟิช (Killifishes)</title>
+  <desc id="group-killifishes-desc">ภาพประกอบปลาหัวตะกั่ว ตัวแทนกลุ่มคิลลีฟิช ลำตัวเพรียวยาวสีเขียวมะกอก มีจุดแดงเล็ก จุดสีเงินบนหัว</desc>
+  <defs></defs>
+  <g id="group-killifishes" class="fish">
+    <path id="group-killifishes-tail" d="M114 124 L70 104 C78 118 78 130 70 144 Z" fill="#C9A66B"/>
+    <path id="group-killifishes-tail-edge" d="M70 104 L78 110 C82 120 82 128 78 138 L70 144 C76 132 76 116 70 104 Z" fill="#E86A3A"/>
+    <path id="group-killifishes-fin-dorsal" d="M170 106 C180 90 202 90 208 104 Z" fill="#9C8A55"/>
+    <path id="group-killifishes-fin-anal" d="M158 136 C170 154 202 154 210 136 Z" fill="#E86A3A"/>
+    <path id="group-killifishes-body" d="M110 124 C140 100 250 96 320 108 C338 112 340 124 322 130 C250 142 140 142 110 124 Z" fill="#7C8B5A"/>
+    <g id="group-killifishes-pattern" fill="#E0524A">
+      <circle cx="160" cy="118" r="2.4"/><circle cx="184" cy="124" r="2.4"/><circle cx="208" cy="114" r="2.4"/>
+      <circle cx="232" cy="122" r="2.4"/><circle cx="256" cy="112" r="2.4"/><circle cx="180" cy="110" r="2.4"/>
+    </g>
+    <ellipse id="group-killifishes-head-spot" cx="300" cy="104" rx="8" ry="4" fill="#F4EFE3"/>
+    <path id="group-killifishes-fin-pectoral" d="M296 124 C284 130 280 138 284 140 C292 134 300 128 302 124 Z" fill="#9C8A55"/>
+    <g id="group-killifishes-eye"><circle cx="312" cy="114" r="7" fill="#E9B44C"/><circle cx="312" cy="114" r="4" fill="#06182A"/></g>
+  </g>
+</svg>

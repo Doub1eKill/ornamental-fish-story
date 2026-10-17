@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1190 666" width="1190" height="666" role="img" aria-labelledby="anat-title anat-desc">
+  <title id="anat-title">อวัยวะภายนอกของปลา</title>
+  <desc id="anat-desc">ปลาด้านข้างหันขวา พร้อมป้ายชื่อ 9 จุด: ครีบหลัง ครีบหาง ครีบก้น ครีบท้อง ครีบอก ตา จมูก ปาก แผ่นปิดเหงือก</desc>
+  <!--
+    overlay บนเฟรมสุดท้ายของ SEQ-2 (public/sequences/seq-2-anatomy/0192.webp, 1190×666 หลังครอป)
+    พิกัดจุดวัดใหม่จากเฟรมจริง · data-anchor-x/y = % ของเฟรม · ปลานิ่ง (ลอยตัวขยับ ≈1%) ตั้งแต่เฟรม ~96
+    ไม่มีตัวปลาวาดในไฟล์นี้แล้ว — ภาพปลามาจาก canvas
+  -->
+  <style>
+    .anatomy-label text { font-family: "IBM Plex Sans Thai", "Noto Sans Thai", sans-serif; fill: #F4EFE3; paint-order: stroke; stroke: rgba(6, 24, 42, 0.75); stroke-width: 4px; stroke-linejoin: round; }
+    .anatomy-label .th { font-size: 26px; font-weight: 600; }
+    .anatomy-label .en { font-size: 17px; fill: #C9D6D3; }
+    .anatomy-label .leader { stroke: #F4EFE3; stroke-width: 2; stroke-linecap: round; }
+    .anatomy-label .anchor-dot { fill: #F2913D; stroke: #06182A; stroke-width: 3; }
+  </style>
+  <g id="labels">
+    <g id="label-dorsal" class="anatomy-label" data-order="1" data-anchor-x="55.5%" data-anchor-y="27.0%">
+      <line id="leader-dorsal" class="leader" x1="660" y1="180" x2="780" y2="100"/>
+      <circle id="dot-dorsal" class="anchor-dot" cx="660" cy="180" r="7"/>
+      <text id="text-dorsal" x="788" y="86" text-anchor="start"><tspan class="th">ครีบหลัง</tspan><tspan class="en" x="788" dy="22">dorsal fin</tspan></text>
+    </g>
+    <g id="label-caudal" class="anatomy-label" data-order="2" data-anchor-x="34.9%" data-anchor-y="54.1%">
+      <line id="leader-caudal" class="leader" x1="415" y1="360" x2="270" y2="300"/>
+      <circle id="dot-caudal" class="anchor-dot" cx="415" cy="360" r="7"/>
+      <text id="text-caudal" x="262" y="286" text-anchor="end"><tspan class="th">ครีบหาง</tspan><tspan class="en" x="262" dy="22">caudal fin</tspan></text>
+    </g>
+    <g id="label-anal" class="anatomy-label" data-order="3" data-anchor-x="46.6%" data-anchor-y="69.1%">
+      <line id="leader-anal" class="leader" x1="555" y1="460" x2="450" y2="570"/>
+      <circle id="dot-anal" class="anchor-dot" cx="555" cy="460" r="7"/>
+      <text id="text-anal" x="442" y="580" text-anchor="end"><tspan class="th">ครีบก้น</tspan><tspan class="en" x="442" dy="22">anal fin</tspan></text>
+    </g>
+    <g id="label-pelvic" class="anatomy-label" data-order="4" data-anchor-x="55.0%" data-anchor-y="78.8%">
+      <line id="leader-pelvic" class="leader" x1="655" y1="525" x2="620" y2="606"/>
+      <circle id="dot-pelvic" class="anchor-dot" cx="655" cy="525" r="7"/>
+      <text id="text-pelvic" x="612" y="622" text-anchor="end"><tspan class="th">ครีบท้อง</tspan><tspan class="en" x="612" dy="22">pelvic fin</tspan></text>
+    </g>
+    <g id="label-pectoral" class="anatomy-label" data-order="5" data-anchor-x="61.8%" data-anchor-y="68.3%">
+      <line id="leader-pectoral" class="leader" x1="735" y1="455" x2="820" y2="596"/>
+      <circle id="dot-pectoral" class="anchor-dot" cx="735" cy="455" r="7"/>
+      <text id="text-pectoral" x="828" y="612" text-anchor="start"><tspan class="th">ครีบอก</tspan><tspan class="en" x="828" dy="22">pectoral fin</tspan></text>
+    </g>
+    <g id="label-eye" class="anatomy-label" data-order="6" data-anchor-x="74.0%" data-anchor-y="53.9%">
+      <line id="leader-eye" class="leader" x1="881" y1="359" x2="881" y2="262"/>
+      <circle id="dot-eye" class="anchor-dot" cx="881" cy="359" r="7"/>
+      <text id="text-eye" x="881" y="222" text-anchor="middle"><tspan class="th">ตา</tspan><tspan class="en" x="881" dy="22">eyes</tspan></text>
+    </g>
+    <g id="label-nostril" class="anatomy-label" data-order="7" data-anchor-x="77.6%" data-anchor-y="51.2%">
+      <line id="leader-nostril" class="leader" x1="924" y1="341" x2="1000" y2="300"/>
+      <circle id="dot-nostril" class="anchor-dot" cx="924" cy="341" r="7"/>
+      <text id="text-nostril" x="1008" y="300" text-anchor="start"><tspan class="th">จมูก</tspan><tspan class="en" x="1008" dy="22">nostril</tspan></text>
+    </g>
+    <g id="label-mouth" class="anatomy-label" data-order="8" data-anchor-x="80.8%" data-anchor-y="55.9%">
+      <line id="leader-mouth" class="leader" x1="962" y1="372" x2="1000" y2="380"/>
+      <circle id="dot-mouth" class="anchor-dot" cx="962" cy="372" r="7"/>
+      <text id="text-mouth" x="1008" y="382" text-anchor="start"><tspan class="th">ปาก</tspan><tspan class="en" x="1008" dy="22">mouth</tspan></text>
+    </g>
+    <g id="label-operculum" class="anatomy-label" data-order="9" data-anchor-x="69.6%" data-anchor-y="58.6%">
+      <line id="leader-operculum" class="leader" x1="828" y1="390" x2="1000" y2="462"/>
+      <circle id="dot-operculum" class="anchor-dot" cx="828" cy="390" r="7"/>
+      <text id="text-operculum" x="1008" y="470" text-anchor="start"><tspan class="th">แผ่นปิดเหงือก</tspan><tspan class="en" x="1008" dy="22">operculum</tspan></text>
+    </g>
+  </g>
+</svg>

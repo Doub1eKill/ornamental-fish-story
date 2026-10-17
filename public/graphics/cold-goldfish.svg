@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="cold-goldfish-title cold-goldfish-desc">
+  <title id="cold-goldfish-title">ปลาทอง (Goldfish)</title>
+  <desc id="cold-goldfish-desc">ภาพประกอบปลาทอง ลำตัวกลมสีส้ม หางคู่พลิ้ว</desc>
+  <defs></defs>
+  <g id="cold-goldfish" class="fish">
+    <path id="cold-goldfish-tail" d="M146 120 C110 70 70 70 50 90 C80 110 90 120 146 124 Z" fill="#F7B26A" opacity="0.9"/>
+    <path id="cold-goldfish-tail-lower" d="M146 124 C100 140 80 170 60 176 C90 186 130 170 146 130 Z" fill="#F7B26A" opacity="0.9"/>
+    <path id="cold-goldfish-fin-dorsal" d="M196 74 C206 44 246 44 258 82 Z" fill="#F7B26A"/>
+    <path id="cold-goldfish-fin-anal" d="M190 162 C186 186 204 194 212 166 Z" fill="#F7B26A"/>
+    <path id="cold-goldfish-body" d="M140 120 C150 70 260 60 300 100 C320 120 310 150 280 160 C230 180 150 170 140 120 Z" fill="#F2913D"/>
+    <path id="cold-goldfish-highlight" d="M176 96 C210 80 252 80 284 98" stroke="#FCD3A1" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.6"/>
+    <path id="cold-goldfish-fin-pectoral" d="M262 142 C248 152 244 164 250 166 C260 158 270 150 272 144 Z" fill="#F7B26A"/>
+    <g id="cold-goldfish-eye"><circle cx="290" cy="108" r="9" fill="#06182A"/><circle cx="292" cy="106" r="2.6" fill="#F4EFE3"/></g>
+  </g>
+</svg>

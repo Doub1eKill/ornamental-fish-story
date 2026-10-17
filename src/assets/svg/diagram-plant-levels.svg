@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-labelledby="pl-title pl-desc">
+  <title id="pl-title">ระดับการเจริญของพรรณไม้น้ำ 4 ประเภท</title>
+  <desc id="pl-desc">ภาพตัดขวางแหล่งน้ำ จากซ้ายไปขวา: พืชชายน้ำที่ริมตลิ่ง รากในดินใต้น้ำตื้นและใบเหนือน้ำ, พืชโผล่เหนือน้ำ (บัว) รากที่พื้นและใบดอกเหนือน้ำ, พืชใต้น้ำอยู่ใต้น้ำทั้งหมด, พืชลอยน้ำที่ผิวน้ำมีรากห้อยในน้ำ</desc>
+  <defs>
+    <linearGradient id="pl-water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1C6A78"/><stop offset="1" stop-color="#0F3E55"/></linearGradient>
+  </defs>
+  <rect id="background" width="1600" height="900" fill="#06182A"/>
+  <path id="water" d="M0 380 H1600 V900 H0 Z" fill="url(#pl-water)"/>
+  <path id="soil" d="M0 380 C120 380 220 420 320 520 C420 620 520 700 700 730 C900 760 1200 760 1600 760 V900 H0 Z" fill="#3B2A20"/>
+  <line id="waterline" x1="0" y1="380" x2="1600" y2="380" stroke="#8FD3CC" stroke-width="3" stroke-dasharray="14 10"/>
+  <text id="waterline-label" x="1580" y="366" text-anchor="end" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#8FD3CC">ระดับผิวน้ำ</text>
+
+  <g id="plant-marginal" class="plant" data-type="marginal">
+    <path d="M250 470 C246 420 236 360 214 290" stroke="#4FA176" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <path d="M262 470 C268 410 290 350 320 300" stroke="#7CC49A" stroke-width="10" fill="none" stroke-linecap="round"/>
+    <ellipse cx="206" cy="282" rx="16" ry="34" fill="#4FA176" transform="rotate(-20 206 282)"/>
+    <ellipse cx="326" cy="292" rx="16" ry="34" fill="#7CC49A" transform="rotate(26 326 292)"/>
+    <circle cx="262" cy="300" r="10" fill="#F4EFE3"/>
+    <path d="M256 470 l-14 30 M256 470 l0 34 M256 470 l14 30" stroke="#C9A66B" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <g id="plant-emerged" class="plant" data-type="emerged">
+    <path d="M620 720 C610 600 640 480 600 386" stroke="#4FA176" stroke-width="7" fill="none"/>
+    <path d="M640 720 C660 600 700 460 716 340" stroke="#4FA176" stroke-width="7" fill="none"/>
+    <ellipse cx="590" cy="384" rx="64" ry="12" fill="#4FA176"/>
+    <path d="M716 340 C690 320 690 290 716 270 C742 290 742 320 716 340 Z" fill="#F4EFE3"/>
+    <path d="M716 340 C696 330 680 312 684 296 C704 304 714 320 716 340 Z" fill="#F2C9D0"/>
+    <path d="M716 340 C736 330 752 312 748 296 C728 304 718 320 716 340 Z" fill="#F2C9D0"/>
+  </g>
+  <g id="plant-submerged" class="plant" data-type="submerged">
+    <path d="M1000 760 C990 680 1010 600 990 520" stroke="#7CC49A" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M1030 760 C1040 690 1020 620 1046 540" stroke="#4FA176" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <path d="M1060 760 C1070 700 1090 650 1080 590" stroke="#2F7A5A" stroke-width="8" fill="none" stroke-linecap="round"/>
+    <g stroke="#7CC49A" stroke-width="4" stroke-linecap="round">
+      <path d="M994 600 l-24 -12 M994 600 l24 -12 M996 660 l-24 -12 M996 660 l24 -12 M1036 610 l-22 -14 M1036 610 l22 -14 M1040 680 l-22 -14 M1040 680 l22 -14"/>
+    </g>
+  </g>
+  <g id="plant-floating" class="plant" data-type="floating">
+    <ellipse cx="1340" cy="378" rx="46" ry="12" fill="#7CC49A"/>
+    <ellipse cx="1430" cy="380" rx="36" ry="10" fill="#4FA176"/>
+    <ellipse cx="1500" cy="378" rx="28" ry="9" fill="#7CC49A"/>
+    <g stroke="#C9A66B" stroke-width="3" stroke-linecap="round" opacity="0.9">
+      <path d="M1330 390 l-6 70 M1346 390 l4 84 M1430 390 l-2 60 M1440 390 l6 72 M1500 388 l0 54"/>
+    </g>
+  </g>
+
+    <g id="label-marginal" class="diagram-label" data-order="1">
+      <text x="120" y="120" text-anchor="start" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" fill="#F4EFE3"><tspan font-size="34" font-weight="600">1. พืชชายน้ำ</tspan></text>
+      <text x="120" y="156" text-anchor="start" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">Marginal Plants</text>
+      <text x="120" y="192" text-anchor="start" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#9FC3C0">อเมซอน · ใบพาย · ลานไพลิน</text>
+    </g>
+    <g id="label-emerged" class="diagram-label" data-order="2">
+      <text x="560" y="120" text-anchor="start" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" fill="#F4EFE3"><tspan font-size="34" font-weight="600">2. พืชโผล่เหนือน้ำ</tspan></text>
+      <text x="560" y="156" text-anchor="start" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">Emerged Plants</text>
+      <text x="560" y="192" text-anchor="start" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#9FC3C0">บัวชนิดต่างๆ</text>
+    </g>
+    <g id="label-submerged" class="diagram-label" data-order="3">
+      <text x="1030" y="440" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" fill="#F4EFE3"><tspan font-size="34" font-weight="600">3. พืชใต้น้ำ</tspan></text>
+      <text x="1030" y="476" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">Submerged Plants</text>
+      <text x="1030" y="512" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#9FC3C0">สาหร่ายหางกระรอก · สันตะวาใบพาย · ไส้ปลาไหล</text>
+    </g>
+    <g id="label-floating" class="diagram-label" data-order="4">
+      <text x="1420" y="120" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" fill="#F4EFE3"><tspan font-size="34" font-weight="600">4. พืชลอยน้ำ</tspan></text>
+      <text x="1420" y="156" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#C9D6D3">Floating Plants</text>
+      <text x="1420" y="192" text-anchor="middle" font-family="'IBM Plex Sans Thai', 'Noto Sans Thai', sans-serif" font-size="22" fill="#9FC3C0">กระจับ · แหนแดง · แหนเป็ด</text>
+    </g>
+</svg>

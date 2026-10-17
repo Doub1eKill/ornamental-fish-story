@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 240" width="400" height="240" role="img" aria-labelledby="group-catfishes-title group-catfishes-desc">
+  <title id="group-catfishes-title">กลุ่มปลาไม่มีเกล็ด (Catfishes)</title>
+  <desc id="group-catfishes-desc">ภาพประกอบปลาก้างพระร่วง ตัวแทนกลุ่มปลาไม่มีเกล็ด ลำตัวใสมองเห็นกระดูกสันหลัง มีหนวดยาว</desc>
+  <defs></defs>
+  <g id="group-catfishes" class="fish">
+    <path id="group-catfishes-tail" d="M104 120 L66 94 L82 120 L66 146 Z" fill="#CFE3E0" opacity="0.6"/>
+    <path id="group-catfishes-fin-anal" d="M126 130 C190 156 262 152 296 132 L292 126 C250 140 190 142 130 124 Z" fill="#CFE3E0" opacity="0.5"/>
+    <path id="group-catfishes-body" d="M100 120 C140 92 250 88 310 104 C330 110 334 124 314 130 C250 146 150 150 100 120 Z" fill="#CFE3E0" opacity="0.45"/>
+    <path id="group-catfishes-spine" d="M108 120 C170 112 250 108 306 110" stroke="#F4EFE3" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <g id="group-catfishes-pattern" stroke="#F4EFE3" stroke-width="1.4" opacity="0.7">
+      <path d="M140 116 l6 14 M164 114 l6 16 M188 112 l6 18 M212 111 l6 18 M236 110 l6 18 M260 110 l6 16"/>
+    </g>
+    <g id="group-catfishes-barbels" stroke="#CFE3E0" stroke-width="2" fill="none" stroke-linecap="round">
+      <path d="M326 114 C350 98 372 88 394 84"/><path d="M326 118 C350 110 372 108 392 110"/>
+    </g>
+    <g id="group-catfishes-eye"><circle cx="314" cy="112" r="6" fill="#06182A"/><circle cx="315.5" cy="110.5" r="1.8" fill="#F4EFE3"/></g>
+  </g>
+</svg>
