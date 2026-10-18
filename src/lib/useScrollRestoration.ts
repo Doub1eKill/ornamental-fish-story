@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { ScrollTrigger } from "./gsap";
 import { MQ } from "./media";
 import { scrollBlockOf } from "./scroll";
+import { pauseScrollAssist } from "./scrollAssist";
 
 const KEY = "ornamental-fish:scroll-y";
 
@@ -40,6 +41,7 @@ export function useScrollRestoration() {
 
     document.fonts.ready.then(() => {
       if (!active) return;
+      pauseScrollAssist(800); // การคืนตำแหน่งไม่ใช่การเลื่อนของผู้ใช้
       ScrollTrigger.refresh();
       const target = location.hash ? document.querySelector<HTMLElement>(decodeURIComponent(location.hash)) : null;
       if (target) target.scrollIntoView();
@@ -78,6 +80,7 @@ export function useScrollRestoration() {
       restoring = true;
       clearTimeout(timer);
       timer = window.setTimeout(() => {
+        pauseScrollAssist(800);
         ScrollTrigger.refresh();
         restore();
         restoring = false;
