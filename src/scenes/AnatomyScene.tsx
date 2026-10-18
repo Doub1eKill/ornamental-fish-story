@@ -15,9 +15,12 @@ const CREAM = "#F4EFE3"; // --text: จุดที่ผ่านแล้ว
  * - หัวข้อ: เข้า 0–8% อยู่ตลอดฉาก
  * - label 1–9: เริ่มที่ 52% ห่างกัน 5% (52, 57, … 92%) แต่ละจุด: จุด → เส้นชี้วาดด้วย stroke-dashoffset → ข้อความ fade
  * - มือถือ: ข้อความใน SVG ซ่อน แสดงเป็นชิปทีละอันใต้ปลา (จุดบนตัวปลายังขึ้นครบ)
+ * - 0.96–1.0: label/เส้น/จุด/ชิป fade ออกก่อนปล่อย pin ไม่ให้ค้างเลื่อนขึ้นไปพร้อมปลา
+ *   (จุด snap ครบ 9 จุด = 0.95 ใน sequences.ts — ต้องอยู่ก่อนช่วง fade เสมอ)
  */
 const LABEL_START = 0.52;
 const LABEL_GAP = 0.05;
+const EXIT_FADE = 0.96;
 
 /** ความยาวเส้น leader — คำนวณจาก x1/y1/x2/y2 ไม่พึ่ง getTotalLength() (ใช้กับ element ที่ไม่ render ไม่ได้) */
 function lineLength(line: SVGLineElement): number {
@@ -52,6 +55,9 @@ function buildAnatomyTimeline(tl: gsap.core.Timeline, { isMobile, section }: Seq
       if (index < anatomy.labels.length - 1) tl.to(chip, { opacity: 0, y: -12, duration: 0.015 }, at + LABEL_GAP - 0.015);
     }
   });
+
+  // fade ทั้งกลุ่ม (opacity ของ <g>/รายการ แยกจาก tween ของลูกด้านใน) ก่อนฉากเลื่อนออก
+  tl.to([".anatomy-overlay .anatomy-label", ".anatomy-chips"], { opacity: 0, duration: 1 - EXIT_FADE }, EXIT_FADE);
 }
 
 /** ฉาก 03 — SEQ-2 + label 9 จุดซ้อนบนเฟรม (พิกัดใน fish-anatomy.svg วัดจากเฟรมสุดท้าย) */

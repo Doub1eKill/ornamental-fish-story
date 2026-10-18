@@ -40,7 +40,9 @@ const annotations: Annotation[] = plants.types.map((type, index) => ({
  */
 function buildDiagram(figure: Element, isMobile: boolean) {
   const tl = gsap.timeline({ defaults: { ease: EASE }, scrollTrigger: { trigger: figure, start: "top 75%", once: true } });
-  tl.from(figure.querySelector(".annotated__guide"), { scaleX: 0, transformOrigin: "left center", duration: 1, ease: "power1.inOut" });
+  // ภาพค่อยๆ ปรากฏ (fade + scale) แทนการโผล่มาโดนตัดตรงรอยต่อฉาก — tween ที่ <img> (กรอบใช้ transform จัดกึ่งกลาง)
+  tl.from(figure.querySelector(".annotated__img"), { opacity: 0, scale: 0.97, duration: 0.8 }, 0);
+  tl.from(figure.querySelector(".annotated__guide"), { scaleX: 0, transformOrigin: "left center", duration: 1, ease: "power1.inOut" }, 0.2);
   annotations.forEach(({ id, anchor, label }, index) => {
     const at = 0.5 + index * 0.35;
     const item = `[data-annotation="${id}"]`;

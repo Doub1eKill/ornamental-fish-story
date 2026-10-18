@@ -78,6 +78,8 @@
   --space-6: 96px;
   --space-7: 160px;
   --gutter: clamp(16px, 5vw, 80px);
+  /* พื้นที่ด้านบนที่ scene indicator (fixed มุมขวาบน) ใช้ — ข้อความที่ตรึงตำแหน่งในฉาก pin ต้องอยู่ต่ำกว่านี้ */
+  --indicator-safe: 72px;
   --content-max: 1280px;
 
   /* ---- radius ---- */

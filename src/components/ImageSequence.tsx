@@ -38,16 +38,24 @@ export default function ImageSequence({ config, alt, build, priority = false, ch
   const rootRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
+  const posterRef = useRef<HTMLImageElement>(null);
 
-  // วาง overlay ให้ตรงกับตำแหน่งเฟรม (ใช้ fitRect ตัวเดียวกับ canvas) — ทำงานทั้งโหมดปกติและ reduced motion
+  // วาง overlay + poster ให้ตรงกับตำแหน่งเฟรม (fitRect ตัวเดียวกับ canvas — รองรับ fit/focal/zoom)
+  // ทำงานทั้งโหมดปกติและ reduced motion (reduced ใช้ poster เป็นภาพนิ่ง label จึงต้องตรงกับ poster)
   useEffect(() => {
     const root = rootRef.current;
     const overlay = overlayRef.current;
+    const poster = posterRef.current;
     if (!root || !overlay) return;
     const mobileQuery = window.matchMedia(MQ.mobile);
     const place = () => {
       const r = fitRect(root.clientWidth, root.clientHeight, source, mobileQuery.matches);
-      Object.assign(overlay.style, { left: `${r.x}px`, top: `${r.y}px`, width: `${r.w}px`, height: `${r.h}px` });
+      const box = { left: `${r.x}px`, top: `${r.y}px`, width: `${r.w}px`, height: `${r.h}px` };
+      Object.assign(overlay.style, box);
+      if (poster) {
+        Object.assign(poster.style, box);
+        poster.classList.add("is-placed");
+      }
     };
     place();
     const resizeObserver = new ResizeObserver(place);
@@ -132,6 +140,7 @@ export default function ImageSequence({ config, alt, build, priority = false, ch
     <div ref={rootRef} className="seq" role="img" aria-label={alt} style={style}>
       {/* poster ระหว่างโหลด = เฟรมแรก · reduced motion = เฟรมสุดท้าย */}
       <img
+        ref={posterRef}
         className="seq__poster"
         src={frameUrl(source, reduced ? source.frameCount - 1 : 0)}
         alt=""

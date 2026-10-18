@@ -25,6 +25,8 @@ const ZONE_TIMING: Record<TankZone["id"], [number, number]> = {
 };
 
 function buildAquascapeTimeline(tl: gsap.core.Timeline, _ctx: SequenceBuildContext) {
+  // แผงพื้นของบทนำ (จอแคบ) ต้องจางเข้าพร้อมข้อความ ไม่ให้เห็นกล่องว่างก่อน
+  tl.fromTo('[data-step="intro"]', { opacity: 0 }, { opacity: 1, duration: 0.03 }, 0.02);
   tl.from('[data-step="intro"] > *', { opacity: 0, y: 24, duration: 0.06, stagger: 0.03 }, 0.02);
   tl.to('[data-step="intro"]', { opacity: 0, y: -24, duration: 0.04 }, 0.26);
 

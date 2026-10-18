@@ -20,7 +20,8 @@ export function fitRect(cw: number, ch: number, source: SequenceSource, mobile: 
   const focal = mobile ? source.focal.mobile : source.focal.desktop;
   const sx = cw / source.width;
   const sy = ch / source.height;
-  const scale = fit === "cover" ? Math.max(sx, sy) : Math.min(sx, sy);
+  const zoom = (mobile ? source.zoom?.mobile : source.zoom?.desktop) ?? 1;
+  const scale = (fit === "cover" ? Math.max(sx, sy) : Math.min(sx, sy)) * zoom;
   const w = source.width * scale;
   const h = source.height * scale;
   // ส่วนที่ล้น/ที่ว่างแบ่งตาม focal: 0 ชิดซ้าย/บน, 0.5 กึ่งกลาง, 1 ชิดขวา/ล่าง

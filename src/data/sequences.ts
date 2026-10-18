@@ -23,6 +23,8 @@ export interface SequenceSource {
   height: number;
   focal: { desktop: Focal; mobile: Focal };
   fit: { desktop: Fit; mobile: Fit };
+  /** ขยายเฟรมเพิ่มจากขนาดที่ได้จาก fit (เช่น contain แล้วขยายให้ตัวแบบใหญ่ขึ้น ส่วนเกินถูกตัดตาม focal) — ค่าเริ่มต้น 1 */
+  zoom?: { desktop?: number; mobile?: number };
   /** สีพื้นเมื่อ fit = contain (ใต้ภาพเบลอ และระหว่างโหลด) */
   fill: string;
 }
@@ -70,15 +72,18 @@ export const sequences = {
     id: "seq-2-anatomy",
     pinVh: 250,
     scrub: 0.6,
-    snap: [0, 0.48, 0.76, 1], // หัวข้อ · ปลาหยุดนิ่ง · label 5 จุดแรกครบ · ครบ 9 จุด
+    snap: [0, 0.48, 0.76, 0.95], // หัวข้อ · ปลาหยุดนิ่ง · label 5 จุดแรกครบ · ครบ 9 จุด (0.96–1.0 label fade ออก)
     sources: [
       {
         path: `${BASE}sequences/seq-2-anatomy`,
         frameCount: 192, // 0–8.0s @24fps · ปลานิ่งตั้งแต่เฟรม ~96 (50%)
         ...FRAME,
-        focal: { desktop: { x: 0.5, y: 0.5 }, mobile: { x: 0.5, y: 0.5 } },
-        // contain: label 9 จุดต้องอยู่บนจอครบทุกสัดส่วนจอ · มือถือได้ปลาเต็มกว้างที่ y ≈ 38–62% ตาม safe area
+        // desktop contain: label 9 จุดต้องอยู่บนจอครบทุกสัดส่วนจอ
+        // มือถือ: ปลากว้าง ~52% ของเฟรม → contain × 1.73 ได้ปลา ~90% ของความกว้างจอ (safe area SEQ-2: y 38–62%)
+        //   focal x 0.64 = ตัวปลา (กึ่งกลางที่ ~56% ของเฟรม) อยู่กลางจอ · จุดทั้ง 9 (x 35–81%) ยังอยู่ในช่วงที่เห็น (~27–85%)
+        focal: { desktop: { x: 0.5, y: 0.5 }, mobile: { x: 0.64, y: 0.49 } },
         fit: { desktop: "contain", mobile: "contain" },
+        zoom: { mobile: 1.73 },
         fill: "#0c2a3f",
       },
     ],

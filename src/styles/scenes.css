@@ -19,14 +19,36 @@
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-color: var(--depth-0);
+  background-color: #3a5f68; /* --depth-0 + ชั้นมืด 0.62 (สีเริ่มก่อน JS) */
 }
 
+/*
+ * รอยต่อระหว่างฉาก: พื้นหลังของฉาก (ภาพ + ชั้นมืด) จางเป็นโปร่งที่ขอบบน/ล่าง → เห็น <OceanBackdrop> ที่เป็น
+ * "สี depth + ชั้นมืด" เดียวกัน รอยต่อจึงกลืนเป็นน้ำต่อเนื่องแทนแถบสีตัด
+ * ฉาก pin (sequence) จางแค่ 8vh เพราะตรึงเต็มจอระหว่างเล่น (ไม่ให้ถึงป้ายในฉาก 03) · ฉากแรกไม่จางขอบบน ฉากสุดท้ายไม่จางขอบล่าง
+ */
 .scene__backdrop {
+  --seam-top: 18vh;
+  --seam-bottom: 18vh;
   position: absolute;
   inset: 0;
   z-index: -1;
   overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 var(--seam-top), #000 calc(100% - var(--seam-bottom)), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 var(--seam-top), #000 calc(100% - var(--seam-bottom)), transparent 100%);
+}
+
+.scene--sequence .scene__backdrop {
+  --seam-top: 8vh;
+  --seam-bottom: 8vh;
+}
+
+.scene[data-scene="01"] .scene__backdrop {
+  --seam-top: 0px;
+}
+
+.scene[data-scene="09"] .scene__backdrop {
+  --seam-bottom: 0px;
 }
 
 .scene__bg,
@@ -48,17 +70,15 @@
   object-position: bottom center;
 }
 
-/* ทำให้ข้อความครีมผ่าน AA บนพื้นน้ำตื้น (depth-0/1/2 สว่าง) */
+/*
+ * ชั้นมืดค่าเดียวทุกฉาก (เดิม depth 3–4 ใช้ 0.3 ทำให้ฉาก 05→06 สว่างขึ้นกะทันหันเป็นแถบ)
+ * ค่าเดียวกับ OCEAN_SHADE ใน OceanBackdrop.tsx — ข้อความครีม/ส้มอ่อนบนน้ำตื้น ≥ 5:1
+ */
 .scene__backdrop::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(6, 24, 42, 0.62); /* ข้อความครีม/ส้มอ่อนบนน้ำตื้น ≥ 5:1 */
-}
-
-.scene--depth-3 .scene__backdrop::after,
-.scene--depth-4 .scene__backdrop::after {
-  background: rgba(6, 24, 42, 0.3);
+  background: rgba(6, 24, 42, 0.62);
 }
 
 .scene__inner {
@@ -142,6 +162,12 @@
 .seq__poster {
   object-fit: var(--fit);
   object-position: var(--focal-x) var(--focal-y);
+}
+
+/* JS วางตำแหน่ง/ขนาดตาม fitRect แล้ว (ตรงกับ canvas และ overlay ทุก fit/zoom) — CSS ด้านบนเป็นค่าก่อน JS ทำงาน */
+.seq__poster.is-placed {
+  inset: auto;
+  object-fit: fill;
 }
 
 /* ตำแหน่ง/ขนาดตั้งโดย JS ให้ตรงกับเฟรม (fitRect) — ลูกด้านในใช้พิกัดเดียวกับเฟรม */
@@ -276,7 +302,7 @@
 
 .scene--anatomy .scene-heading {
   position: absolute;
-  top: 6%;
+  top: max(6%, var(--indicator-safe));
   left: 6%;
   z-index: 2;
   margin: 0;
@@ -398,7 +424,7 @@
 .scene--tropical.is-rail {
   height: 100svh;
   min-height: 600px;
-  padding-block: var(--space-5) var(--space-4);
+  padding-block: max(var(--space-5), var(--indicator-safe)) var(--space-4);
   align-content: center;
 }
 
@@ -523,6 +549,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* ขอบบน/ล่างของภาพไล่จางเข้าพื้นฉาก ไม่เห็นภาพโดนตัดเป็นเส้นตรง (เฉพาะภาพ — ป้ายไม่จาง) */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
 
 .annotated__overlay,
@@ -869,6 +898,19 @@
   border-radius: var(--radius-pill);
   background: var(--indicator-bg);
   backdrop-filter: blur(6px);
+  transition: transform 260ms var(--ease-out), opacity 260ms var(--ease-out);
+}
+
+/* มือถือ: ซ่อนตอนเลื่อนลง ไม่ให้ทับเนื้อหาที่กำลังอ่าน (class ใส่โดย SceneIndicator) */
+.scene-indicator.is-hidden {
+  transform: translateY(calc(-100% - var(--space-2) - 4px));
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-indicator {
+    transition: none;
+  }
 }
 
 .scene-indicator__count {
@@ -944,6 +986,20 @@
   .scene--aquascape.is-sequenced .aqua-copy {
     width: 40%;
   }
+
+  /*
+   * จอแคบ ข้อความทับภาพไม้น้ำลายเยอะ → บทนำ/หลักเกณฑ์อยู่ในแผงพื้นทึบโปร่ง (--depth-4 · 0.78) + blur
+   * (การ์ดโซนมีพื้นของตัวเองอยู่แล้ว)
+   */
+  .scene--aquascape.is-sequenced [data-step="intro"],
+  .scene--aquascape.is-sequenced .rules {
+    padding: var(--space-2);
+    border: 1px solid rgba(244, 239, 227, 0.12);
+    border-radius: var(--radius-md);
+    background: rgba(6, 24, 42, 0.78);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
 }
 
 /* =========================================================================
@@ -951,8 +1007,18 @@
    ========================================================================= */
 
 @media (max-width: 767px) {
+  :root {
+    --indicator-safe: 60px; /* indicator มือถือเหลือแค่ตัวเลข สูง ~30px */
+  }
+
   .scene {
-    padding: var(--space-5) var(--gutter);
+    padding: max(var(--space-5), var(--indicator-safe)) var(--gutter) var(--space-5);
+  }
+
+  .scene-indicator {
+    top: 12px;
+    right: 12px;
+    padding: 4px 12px;
   }
 
   .trait-grid,
@@ -975,7 +1041,7 @@
   .scene--hero .seq-copy {
     left: var(--gutter);
     right: var(--gutter);
-    top: 8%;
+    top: max(8%, var(--indicator-safe));
     width: auto;
     transform: none;
     gap: var(--space-2);
@@ -986,9 +1052,12 @@
     object-position: var(--focal-x-mobile) var(--focal-y-mobile);
   }
 
-  /* ข้อความทีละช่วงอยู่โซนบน y 8–36% → ใช้ --overlay-top ตาม spec */
+  /*
+   * ข้อความทีละช่วงอยู่โซนบน y 8–40% บนท้องฟ้าสว่างของเฟรมแรก → เข้มกว่า --overlay-top ตลอดช่วงข้อความ
+   * ครีม ≥ 6:1 / ครีมอ่อน (muted) ≥ 4.5:1 แม้บนท้องฟ้าเกือบขาว แล้วค่อยจางหมดที่ 60%
+   */
   .scene--hero.is-sequenced .scene__backdrop::after {
-    background: var(--overlay-top);
+    background: linear-gradient(180deg, rgba(6, 24, 42, 0.9) 0%, rgba(6, 24, 42, 0.82) 34%, rgba(6, 24, 42, 0.62) 46%, rgba(6, 24, 42, 0) 60%);
   }
 
   .is-sequenced .seq-copy__step {
@@ -1074,15 +1143,20 @@
     display: none;
   }
 
+  /* เลข 1–4 อย่างน้อย 28px มีขอบเข้ม + เงา เห็นชัดบนภาพ (จุดห่างกันพอ ไม่ทับกัน) */
   .plants-photo .annotated__dot {
-    width: 26px;
-    height: 26px;
-    margin: -13px 0 0 -13px;
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+    font-size: 15px;
+    border-width: 2.5px;
+    box-shadow: 0 0 0 3px rgba(242, 145, 61, 0.3), 0 2px 6px rgba(6, 24, 42, 0.85);
   }
 
   /* ภาพถูกตัดซ้าย-ขวาข้างละ ~8% (16:9 ในกล่อง 3:2) → เลื่อนป้ายผิวน้ำเข้ามาให้พ้นขอบ */
+  /* ป้าย "ระดับผิวน้ำ" ทับเลข 1 บนจอแคบ → ซ่อน (เส้นประยังอยู่ · คำอธิบายอยู่ในการ์ดด้านล่าง) */
   .plants-photo .annotated__guide-label {
-    left: 10%;
+    display: none;
   }
 
   /* Aquascape: ข้อความโซนบน y 8–38% บน --overlay-top · ตู้กลางจอ (focal x 68%) */
@@ -1096,7 +1170,7 @@
   }
 
   .scene--aquascape.is-sequenced .aqua-copy {
-    top: 6%;
+    top: max(6%, var(--indicator-safe));
     left: var(--gutter);
     right: var(--gutter);
     width: auto;
@@ -1120,6 +1194,11 @@
 
   .scene--aquascape:not(.is-sequenced) .scene__backdrop::after {
     background: rgba(6, 24, 42, 0.7);
+  }
+
+  /* reduced motion มือถือ: ข้อความไหลทับภาพตู้ทั้งฉาก → ซ่อนกรอบ/ชื่อโซนบนภาพ ไม่ให้โผล่ข้างการ์ด (การ์ดโซนมีชื่อเดียวกัน) */
+  .scene--aquascape:not(.is-sequenced) .zone-overlay {
+    display: none;
   }
 
   .scene-indicator__list {
